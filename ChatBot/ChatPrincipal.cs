@@ -15,7 +15,7 @@ namespace ChatBot
 
         private void enviar_Click(object sender, EventArgs e)
         {
-
+            chatbot.Text = "";
             // Obtener la entrada del usuario desde el TextBox 'usuario'
             string entradaUsuario = usuario.Text;
 
