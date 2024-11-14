@@ -33,8 +33,138 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="grizzly-framework-2.4.4, Version=2.4.4.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\grizzly-framework-2.4.4.dll</HintPath>
+    </Reference>
+    <Reference Include="grizzly-http-2.4.4, Version=2.4.4.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\grizzly-http-2.4.4.dll</HintPath>
+    </Reference>
+    <Reference Include="grizzly-http-server-2.4.4, Version=2.4.4.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\grizzly-http-server-2.4.4.dll</HintPath>
+    </Reference>
+    <Reference Include="hppc-0.7.2, Version=0.7.2.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\hppc-0.7.2.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Java, Version=8.2.0.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.2.1\lib\net461\IKVM.Java.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Reflection, Version=8.2.0.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.2.1\lib\net461\IKVM.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime, Version=8.2.0.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.2.1\lib\net461\IKVM.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime.JNI, Version=8.2.0.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <HintPath>..\packages\IKVM.8.2.1\lib\net461\IKVM.Runtime.JNI.dll</HintPath>
+    </Reference>
+    <Reference Include="jackson-annotations-2.10.1, Version=2.10.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jackson-annotations-2.10.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jackson-core-2.10.1, Version=2.10.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jackson-core-2.10.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jackson-databind-2.10.1, Version=2.10.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jackson-databind-2.10.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jackson-module-jaxb-annotations-2.10.1, Version=2.10.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jackson-module-jaxb-annotations-2.10.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jakarta.activation-api-1.2.1, Version=1.2.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jakarta.activation-api-1.2.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jakarta.annotation-api-1.3.5, Version=1.3.5.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jakarta.annotation-api-1.3.5.dll</HintPath>
+    </Reference>
+    <Reference Include="jakarta.inject-2.6.1, Version=2.6.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jakarta.inject-2.6.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jakarta.validation-api-2.0.2, Version=2.0.2.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jakarta.validation-api-2.0.2.dll</HintPath>
+    </Reference>
+    <Reference Include="jakarta.ws.rs-api-2.1.6, Version=2.1.6.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jakarta.ws.rs-api-2.1.6.dll</HintPath>
+    </Reference>
+    <Reference Include="jakarta.xml.bind-api-2.3.2, Version=2.3.2.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jakarta.xml.bind-api-2.3.2.dll</HintPath>
+    </Reference>
+    <Reference Include="jcommander-1.78, Version=1.78.0.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jcommander-1.78.dll</HintPath>
+    </Reference>
+    <Reference Include="jersey-client-2.30.1, Version=2.30.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jersey-client-2.30.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jersey-common-2.30.1, Version=2.30.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jersey-common-2.30.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jersey-container-grizzly2-http-2.30.1, Version=2.30.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jersey-container-grizzly2-http-2.30.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jersey-entity-filtering-2.30.1, Version=2.30.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jersey-entity-filtering-2.30.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jersey-media-jaxb-2.30.1, Version=2.30.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jersey-media-jaxb-2.30.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jersey-media-json-jackson-2.30.1, Version=2.30.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jersey-media-json-jackson-2.30.1.dll</HintPath>
+    </Reference>
+    <Reference Include="jersey-server-2.30.1, Version=2.30.1.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\jersey-server-2.30.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="morfologik-fsa-2.1.7, Version=2.1.7.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\morfologik-fsa-2.1.7.dll</HintPath>
+    </Reference>
+    <Reference Include="morfologik-fsa-builders-2.1.7, Version=2.1.7.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\morfologik-fsa-builders-2.1.7.dll</HintPath>
+    </Reference>
+    <Reference Include="morfologik-stemming-2.1.7, Version=2.1.7.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\morfologik-stemming-2.1.7.dll</HintPath>
+    </Reference>
+    <Reference Include="morfologik-tools-2.1.7, Version=2.1.7.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\morfologik-tools-2.1.7.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenNLP, Version=1.0.7182.26901, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.1.3.5\lib\net45\OpenNLP.dll</HintPath>
+    </Reference>
+    <Reference Include="opennlp-brat-annotator-1.9.4, Version=1.9.4.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\opennlp-brat-annotator-1.9.4.dll</HintPath>
+    </Reference>
+    <Reference Include="opennlp-morfologik-addon-1.9.4, Version=1.9.4.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\opennlp-morfologik-addon-1.9.4.dll</HintPath>
+    </Reference>
+    <Reference Include="opennlp-tools-1.9.4, Version=1.9.4.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\opennlp-tools-1.9.4.dll</HintPath>
+    </Reference>
+    <Reference Include="opennlp-uima-1.9.4, Version=1.9.4.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\opennlp-uima-1.9.4.dll</HintPath>
+    </Reference>
+    <Reference Include="osgi-resource-locator-1.0.3, Version=1.0.3.0, Culture=neutral, PublicKeyToken=f2aa5350432048ad, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.NET.1.9.4.1\lib\net461\osgi-resource-locator-1.0.3.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpEntropy, Version=1.0.7182.26900, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenNLP.1.3.5\lib\net45\SharpEntropy.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,6 +196,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

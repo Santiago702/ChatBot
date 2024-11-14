@@ -11,53 +11,103 @@ namespace ChatBot
         public ChatPrincipal()
         {
             InitializeComponent();
+            chatbot.AppendText("chatbot: Hola, soy tu asistente de registro de Nucleos Temáticos 😊." + Environment.NewLine);
+
+            chatbot.AppendText("chatbot: Dime, ¿Cómo puedo ayudarte hoy?" + Environment.NewLine);
         }
 
         private void enviar_Click(object sender, EventArgs e)
         {
-            chatbot.Text = "";
-            // Obtener la entrada del usuario desde el TextBox 'usuario'
-            string entradaUsuario = usuario.Text;
+            /*
+            // Obtén la entrada del usuario
+            string entrada = usuario.Text;
 
-            // Realizar la tokenización y stemming
-            List<string> tokens = TokenizarTexto(entradaUsuario);
-            List<string> stemmedTokens = StemTokens(tokens);
+            // Procesa la entrada (tokenización, etc.)
+            List<string> Tokens = Tokenizar(entrada);
 
-            // Mostrar los resultados en el TextBox 'chatbot'
-            chatbot.AppendText($"Entrada del usuario: {entradaUsuario}\n");
-            chatbot.AppendText("Tokens generados: " + string.Join(", ", tokens) + "\n");
-            chatbot.AppendText("Tokens procesados (Stemming): " + string.Join(", ", stemmedTokens) + "\n\n");
-        }
+            // Agrega los resultados al final del TextBox de manera similar a un chat
+            chatbot.AppendText("Usuario: " + entrada + Environment.NewLine);
+            chatbot.AppendText("Chatbot: Palabras encontradas: ");
 
-        // Método para tokenizar el texto
-        private List<string> TokenizarTexto(string texto)
-        {
-            // Convertir a minúsculas y dividir el texto en palabras
-            return Regex.Split(texto.ToLower(), "\\W+").Where(t => !string.IsNullOrEmpty(t)).ToList();
-        }
-
-        // Método para realizar stemming en los tokens
-        private List<string> StemTokens(List<string> tokens)
-        {
-            // Simular un proceso de stemming básico (usar librerías como SnowballStemmer en proyectos más avanzados)
-            List<string> stemmed = new List<string>();
-            foreach (var token in tokens)
+            for (int i = 0; i < Tokens.Count(); i++)
             {
-                // Simulación de un stemming simple eliminando sufijos comunes
-                if (token.EndsWith("ing"))
+                chatbot.AppendText(Tokens[i]);
+                if (i < Tokens.Count - 1)
                 {
-                    stemmed.Add(token.Substring(0, token.Length - 3));
+                    chatbot.AppendText(", ");
                 }
-                else if (token.EndsWith("ed"))
+            }
+
+            chatbot.AppendText(Environment.NewLine); // Añade un salto de línea extra para separar mensajes
+
+            // Limpia el TextBox de entrada
+            usuario.Clear();
+            */
+        }
+
+        // Función de tokenización
+        public static List<string> Tokenizar(string texto)
+        {
+            // Divide el texto por espacios y elimina signos de puntuación
+            string[] tokens = Regex.Split(texto.ToLower(), "[^a-záéíóúñ]+", RegexOptions.CultureInvariant);
+            List<string> resultado = new List<string>(tokens);
+            resultado.RemoveAll(token => string.IsNullOrEmpty(token)); // Remueve elementos vacíos
+            return resultado;
+        }
+
+        // Función de lematización (simplificada)
+        public static List<string> Lemmatizar(List<string> tokens)
+        {
+            // Diccionario simulado de lemas
+            Dictionary<string, string> lemas = new Dictionary<string, string>
+        {
+            { "corriendo", "correr" },
+            { "comiendo", "comer" },
+            { "estudiando", "estudiar" },
+            { "niños", "niño" },
+            { "ratones", "ratón" },
+            // Agrega más lemas según sea necesario
+        };
+
+            List<string> resultado = new List<string>();
+            foreach (string token in tokens)
+            {
+                if (lemas.ContainsKey(token))
                 {
-                    stemmed.Add(token.Substring(0, token.Length - 2));
+                    resultado.Add(lemas[token]); // Reemplaza por el lema
                 }
                 else
                 {
-                    stemmed.Add(token);
+                    resultado.Add(token); // Deja el token original si no hay lema
                 }
             }
-            return stemmed;
+            return resultado;
         }
+
+        // Función de stemming (simulada)
+        public static List<string> Stemmatizar(List<string> tokens)
+        {
+            List<string> resultado = new List<string>();
+            foreach (string token in tokens)
+            {
+                // Simulación simple de stemming
+                string stem = token;
+                if (token.EndsWith("ando") || token.EndsWith("iendo"))
+                {
+                    stem = token.Substring(0, token.Length - 4); // Elimina terminaciones de gerundios
+                }
+                else if (token.EndsWith("ción") || token.EndsWith("sión"))
+                {
+                    stem = token.Substring(0, token.Length - 3) + "r"; // Convierte "-ción"/"-sión" a "-r"
+                }
+                else if (token.EndsWith("es"))
+                {
+                    stem = token.Substring(0, token.Length - 2); // Elimina "-es"
+                }
+                resultado.Add(stem);
+            }
+            return resultado;
+        }
+
     }
 }

@@ -61,13 +61,16 @@
             // 
             // ChatPrincipal
             // 
+            this.AcceptButton = this.enviar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 415);
             this.Controls.Add(this.enviar);
             this.Controls.Add(this.chatbot);
             this.Controls.Add(this.usuario);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ChatPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Asistente de Registro de Horario";
             this.ResumeLayout(false);
             this.PerformLayout();
