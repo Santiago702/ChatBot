@@ -47,7 +47,7 @@
             // chatbot
             // 
             this.chatbot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.chatbot.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chatbot.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chatbot.Location = new System.Drawing.Point(43, 60);
             this.chatbot.Multiline = true;
             this.chatbot.Name = "chatbot";
@@ -112,7 +112,7 @@
             this.Controls.Add(this.enviar);
             this.Controls.Add(this.chatbot);
             this.Controls.Add(this.usuario);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ChatPrincipal";

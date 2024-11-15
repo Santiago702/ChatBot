@@ -28,13 +28,17 @@ namespace ChatBot.Funciones
             { "matriculacion", "matricular" },
             { "inscripcion", "inscribir" },
             { "meter", "inscribir" },
-            {"añadir","matricular" },// Eliminacion:
+            {"añadir","matricular" },
+            {"agregar","matricular" },
+            {"agregando","matricular" },
+            // Eliminacion:
             { "retiro", "retirar" },
             { "eliminacion", "eliminar" },
             { "borre", "borrar" },
             { "sacar", "desmatricular" },
             {"quite","quitar" },
             { "elimine", "eliminar" },
+            { "eliminando", "eliminar" },
             //Confirmación:
             { "afirmativo", "si" },
             { "correcto", "si" },
@@ -79,7 +83,7 @@ namespace ChatBot.Funciones
                 }
                 else if (token.EndsWith("iendo"))
                 {
-                    stem = token.Substring(0, token.Length - 4) + "er"; 
+                    stem = token.Substring(0, token.Length - 4) + "ir"; 
                 }
                 else if (token.EndsWith("ción") || token.EndsWith("sión"))
                 {
