@@ -47,6 +47,8 @@
             this.chatbot.Location = new System.Drawing.Point(43, 50);
             this.chatbot.Multiline = true;
             this.chatbot.Name = "chatbot";
+            this.chatbot.ReadOnly = true;
+            this.chatbot.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.chatbot.Size = new System.Drawing.Size(688, 290);
             this.chatbot.TabIndex = 1;
             // 
@@ -71,6 +73,7 @@
             this.Controls.Add(this.usuario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ChatPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Asistente de Registro de Horario";

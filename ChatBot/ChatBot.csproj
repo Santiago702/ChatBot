@@ -191,6 +191,7 @@
     <Compile Include="ChatPrincipal.Designer.cs">
       <DependentUpon>ChatPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Funciones\Funcion.cs" />
     <Compile Include="Modelos\estudiante.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
