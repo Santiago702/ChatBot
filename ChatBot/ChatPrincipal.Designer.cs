@@ -32,6 +32,8 @@
             this.usuario = new System.Windows.Forms.TextBox();
             this.chatbot = new System.Windows.Forms.TextBox();
             this.enviar = new System.Windows.Forms.Button();
+            this.textoCreditos = new System.Windows.Forms.Label();
+            this.creditosRestantes = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // usuario
@@ -44,12 +46,12 @@
             // chatbot
             // 
             this.chatbot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.chatbot.Location = new System.Drawing.Point(43, 50);
+            this.chatbot.Location = new System.Drawing.Point(43, 60);
             this.chatbot.Multiline = true;
             this.chatbot.Name = "chatbot";
             this.chatbot.ReadOnly = true;
             this.chatbot.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.chatbot.Size = new System.Drawing.Size(688, 290);
+            this.chatbot.Size = new System.Drawing.Size(688, 280);
             this.chatbot.TabIndex = 1;
             // 
             // enviar
@@ -62,12 +64,31 @@
             this.enviar.UseVisualStyleBackColor = true;
             this.enviar.Click += new System.EventHandler(this.enviar_Click);
             // 
+            // textoCreditos
+            // 
+            this.textoCreditos.AutoSize = true;
+            this.textoCreditos.Location = new System.Drawing.Point(48, 28);
+            this.textoCreditos.Name = "textoCreditos";
+            this.textoCreditos.Size = new System.Drawing.Size(72, 20);
+            this.textoCreditos.TabIndex = 3;
+            this.textoCreditos.Text = "Creditos:";
+            // 
+            // creditosRestantes
+            // 
+            this.creditosRestantes.Location = new System.Drawing.Point(144, 22);
+            this.creditosRestantes.Name = "creditosRestantes";
+            this.creditosRestantes.ReadOnly = true;
+            this.creditosRestantes.Size = new System.Drawing.Size(59, 26);
+            this.creditosRestantes.TabIndex = 4;
+            // 
             // ChatPrincipal
             // 
             this.AcceptButton = this.enviar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 415);
+            this.Controls.Add(this.creditosRestantes);
+            this.Controls.Add(this.textoCreditos);
             this.Controls.Add(this.enviar);
             this.Controls.Add(this.chatbot);
             this.Controls.Add(this.usuario);
@@ -87,6 +108,8 @@
         public System.Windows.Forms.TextBox usuario;
         public System.Windows.Forms.TextBox chatbot;
         private System.Windows.Forms.Button enviar;
+        public System.Windows.Forms.Label textoCreditos;
+        public System.Windows.Forms.TextBox creditosRestantes;
     }
 }
 

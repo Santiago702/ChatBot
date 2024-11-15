@@ -15,12 +15,18 @@ namespace ChatBot
     {
         Funcion f = new Funcion();
         estudiante est = new estudiante();
+        List<materia> mat = new List<materia>();
+        Datos dt = new Datos(); 
         string posicionActual = "inicio";
         string posicionAnterior = "";
         string accion = "";
+
+        List<materia> aInscribir = new List<materia>();
         public ChatPrincipal()
         {
             InitializeComponent();
+            creditosRestantes.Visible = false;
+            textoCreditos.Visible = false;  
             Chat('c', "Hola, soy tu asistente de registro de Nucleos Temáticos 😊.");
             Chat('c', "Dime, ¿Cómo puedo ayudarte hoy?");
         }
@@ -110,10 +116,42 @@ namespace ChatBot
                 
                 if(entrada.Equals(est.contraseña.ToString()))
                 {
+                    creditosRestantes.Visible = true;
+                    textoCreditos.Visible = true;
+
+                    creditosRestantes.Text = est.creditos.ToString();  
+
                     Chat('c', "Todo listo");
-                    posicionAnterior = posicionActual;
-                    posicionActual = "registrado";
+                    
                     usuario.PasswordChar = '\0';
+                    if (accion == "registro")
+                    {
+                        if(est.creditos == 0)
+                        {
+                            Chat('c', "Al parecer ya tienes registrado todos tus creditos");
+                            Chat('c', "¿Deseas salir o quieres eliminar alguna materia?");
+                            posicionAnterior = posicionActual;
+                            posicionActual = "inicio";
+                        }
+                        else
+                        {
+                            Chat('c', "Las materias que puedes registrar son: ");
+                            List<materia> Materias = dt.obtenerMaterias(est.estudiante_id);
+                            mat = Materias;
+                            foreach (var materia in Materias)
+                            {
+                                Chat('c', " - " + materia.nombre.ToString());
+                            }
+                            Chat('c', "¿Cuál deseas inscribir?");
+                            posicionAnterior = posicionActual;
+                            posicionActual = "inscripcion";
+                        }
+                    }
+                    else if (accion == "eliminar")
+                    {
+
+                    }
+
                 }
                 else
                 {
@@ -121,17 +159,38 @@ namespace ChatBot
                     
                 }
             }
-            else if(posicionActual == "registrado")
+            else if (posicionActual == "inscripcion")
             {
-                if(accion == "registro")
+                Chat('u', entrada);
+                foreach (var materia in mat)
                 {
+                    List<string> Tokenizadas = f.Tokenizado(materia.nombre.ToString());
 
+                    bool todosContenidos = Tokenizadas.All(token => Tokens.Contains(token));
+
+                    if (todosContenidos)
+                    {
+                        aInscribir.Add(materia);
+                    }
                 }
-                else if (accion == "eliminar")
+                if(aInscribir.Count > 0)
                 {
+                    Chat('c', "Entiendo que quieres inscribir la(s) siguiente(s) materia(s), ¿es correcto?: ");
+
+                    foreach(var materia in aInscribir)
+                    {
+                        Chat('c', " - " + materia.nombre.ToString() +" : " + materia.creditos + " creditos.");
+                    }
+                    posicionAnterior = posicionActual;
+                    posicionActual = "confirmarInscripcion";
+                }
+                else
+                {
+                    Chat('c', "No entendí cuál materia te interesa registrar, escribelo nuevamente: ");
 
                 }
             }
+            
 
 
 
