@@ -22,6 +22,7 @@ namespace ChatBot
         string accion = "";
 
         List<materia> aInscribir = new List<materia>();
+        List<materia> aEliminar = new List<materia>();
         public ChatPrincipal()
         {
             InitializeComponent();
@@ -37,13 +38,15 @@ namespace ChatBot
             string entrada = usuario.Text;
             List<string> Tokens = f.Tokenizado(entrada);
             List<string> Lemas = f.Lematizado(Tokens);
-            bool RegistrosTokens = (Tokens.Contains("registrar") || Tokens.Contains("matricular") || Tokens.Contains("inscribir") || Tokens.Contains("añadir"));
+            List<string> Stemming = f.Stematizado(Tokens); 
+            bool RegistrosTokens = (Tokens.Contains("registrar") || Tokens.Contains("matricular") || Tokens.Contains("inscribir") || Tokens.Contains("añadir") || Stemming.Contains("registrar") || Stemming.Contains("matricular") || Stemming.Contains("inscribir") || Stemming.Contains("añadir"));
             bool RegistrosLemas = (Lemas.Contains("registrar") || Lemas.Contains("matricular") || Lemas.Contains("inscribir") || Lemas.Contains("añadir"));
 
-            bool EliminacionTokens = (Tokens.Contains("retirar") || Tokens.Contains("eliminar") || Tokens.Contains("borrar") || Tokens.Contains("desmatricular") || Tokens.Contains("quitar"));
+            bool EliminacionTokens = (Tokens.Contains("retirar") || Tokens.Contains("eliminar") || Tokens.Contains("borrar") || Tokens.Contains("desmatricular") || Tokens.Contains("quitar") || Stemming.Contains("retirar") || Stemming.Contains("eliminar") || Stemming.Contains("borrar") || Stemming.Contains("desmatricular") || Stemming.Contains("quitar"));
             bool EliminacionLemas = (Lemas.Contains("retirar") || Lemas.Contains("eliminar") || Lemas.Contains("borrar") || Lemas.Contains("desmatricular") || Lemas.Contains("quitar"));
 
             bool Errores = (RegistrosTokens && EliminacionTokens) || (RegistrosTokens && EliminacionTokens) || (RegistrosLemas && EliminacionTokens) || (RegistrosLemas && EliminacionTokens);
+
 
 
             
@@ -124,13 +127,16 @@ namespace ChatBot
                     Chat('c', "Todo listo");
                     mat.Clear();
                     aInscribir.Clear();
+                    aEliminar.Clear();
                     usuario.PasswordChar = '\0';
                     if (accion == "registro")
                     {
                         if (est.creditos == 0)
                         {
                             Chat('c', "Al parecer ya tienes registrado todos tus creditos");
-                            Chat('c', "¿Deseas eliminar alguna materia?");
+                            Chat('c', "Te recomiendo eliminar algunas materias antes");
+                            creditosRestantes.Visible = false;
+                            textoCreditos.Visible = false;
                             posicionAnterior = posicionActual;
                             posicionActual = "inicio";
                         }
@@ -150,7 +156,29 @@ namespace ChatBot
                     }
                     else if (accion == "eliminar")
                     {
+                        List<materia> inscritas = dt.verInscripciones(est.estudiante_id);
+                        if(est.creditos == 18 || inscritas.Count == 0 )
+                        {
+                            Chat('c', "Al parecer no tienes registrada ninguna materia ");
+                            Chat('c', "Te recomiendo añadir algunas materias antes");
+                            creditosRestantes.Visible = false;
+                            textoCreditos.Visible = false;
+                            posicionAnterior = posicionActual;
+                            posicionActual = "inicio";
 
+                        }
+                        else
+                        {
+                            Chat('c', "Las materias que puedes eliminar son: ");
+                            foreach (var materia in inscritas)
+                            {
+                                Chat('c', " - " + materia.nombre.ToString());
+                            }
+                            Chat('c', "¿Cuál deseas eliminar?");
+                            mat = inscritas;
+                            posicionAnterior = posicionActual;
+                            posicionActual = "eliminacion";
+                        }
                     }
 
                 }
@@ -231,9 +259,83 @@ namespace ChatBot
                     posicionAnterior = posicionActual;
                     posicionActual = "inscripcion";
                     aInscribir.Clear();
+                    aEliminar.Clear();
                 }
             }
-            
+
+            else if (posicionActual == "eliminacion")
+            {
+                Chat('u', entrada);
+                foreach (var materia in mat)
+                {
+                    List<string> Tokenizadas = f.Tokenizado(materia.nombre.ToString());
+
+                    bool todosContenidos = Tokenizadas.All(token => Tokens.Contains(token));
+
+                    if (todosContenidos)
+                    {
+                        aEliminar.Add(materia);
+                    }
+                }
+                if (aEliminar.Count > 0)
+                {
+                    Chat('c', "Entiendo que quieres eliminar la(s) siguiente(s) materia(s), ¿es correcto?: ");
+
+                    foreach (var materia in aEliminar)
+                    {
+                        Chat('c', " - " + materia.nombre.ToString() + " : " + materia.creditos + " creditos.");
+                    }
+                    posicionAnterior = posicionActual;
+                    posicionActual = "confirmarEliminacion";
+                }
+                else
+                {
+                    Chat('c', "No entendí cuál materia te interesa eliminar, escribelo nuevamente: ");
+
+                }
+            }
+            else if (posicionActual == "confirmarEliminacion")
+            {
+                Chat('u', entrada);
+                bool afirma = Lemas.Contains("si");
+                bool niega = Lemas.Contains("no");
+
+                if (afirma && niega)
+                {
+                    Chat('c', "No entendí si es correcto o no, intenta ser mas específico:");
+                }
+                else if (afirma)
+                {
+                    est = dt.eliminarMaterias(aEliminar, est.estudiante_id);
+                    creditosRestantes.Text = est.creditos.ToString();
+                    List<materia> inscritas = dt.verInscripciones(est.estudiante_id);
+                    Chat('c', "Eliminada correctamente, actualmente tus inscripciones están así:");
+                    foreach (var materia in inscritas)
+                    {
+                        Chat('c', " - " + materia.nombre.ToString() + " : " + materia.creditos + " creditos.");
+                    }
+                    Chat('c', "Te quedaron " + est.creditos + " creditos restantes");
+                    Chat('c', "Gracias por usar mi chat, ¿quieres inscribir o eliminar alguna materia?");
+                    posicionAnterior = posicionActual;
+                    posicionActual = "inicio";
+                    creditosRestantes.Visible = false;
+                    textoCreditos.Visible = false;
+                }
+                else if (niega)
+                {
+                    Chat('c', "Las materias que puedes eliminar son: ");
+                    foreach (var materia in mat)
+                    {
+                        Chat('c', " - " + materia.nombre.ToString());
+                    }
+                    Chat('c', "¿Cuál deseas eliminar?");
+                    posicionAnterior = posicionActual;
+                    posicionActual = "eliminacion";
+                    aInscribir.Clear();
+                    aEliminar.Clear();
+                }
+            }
+
 
 
 

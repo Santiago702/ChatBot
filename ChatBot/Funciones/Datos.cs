@@ -77,7 +77,48 @@ namespace ChatBot.Funciones
             
         }
 
-        
+        public estudiante eliminarMaterias(List<materia> materias, int id_estudiante)
+        {
+            using (ChatBotEntities cb = new ChatBotEntities())
+            {
+                // Obtener los IDs de las materias de la lista proporcionada
+                var materiaIds = materias.Select(m => m.materia_id).ToList();
+                int totalCreditos = materias.Sum(m => m.creditos);
+                // Buscar el estudiante
+                var estudiante = cb.estudiante.SingleOrDefault(e => e.estudiante_id == id_estudiante);
+
+                if (estudiante != null)
+                {
+                    // Filtrar las inscripciones que coinciden con los materia_id y tienen estado "inscrito"
+                    var materiasInscritas = cb.inscripcion
+                                              .Where(inscripcion => inscripcion.estudiante_id == id_estudiante
+                                                                    && inscripcion.estado == "inscrito"
+                                                                    && materiaIds.Contains(inscripcion.materia_id))
+                                              .ToList();
+
+                    // Eliminar las inscripciones correspondientes
+                    foreach (var inscripcion in materiasInscritas)
+                    {
+                        cb.inscripcion.Remove(inscripcion);
+                    }
+                    estudiante.creditos = estudiante.creditos + totalCreditos;
+                    // Guardar los cambios en la base de datos
+                    cb.SaveChanges();
+
+                    return estudiante; // Devolver el objeto estudiante actualizado (si lo necesitas)
+                }
+                else
+                {
+                    Console.WriteLine("Estudiante no encontrado.");
+                    return null;
+                }
+            }
+        }
+
+
+
+
+
 
 
 

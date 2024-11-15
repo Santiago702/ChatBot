@@ -89,7 +89,16 @@ namespace ChatBot.Funciones
                 {
                     stem = token.Substring(0, token.Length - 2); // Elimina "-es"
                 }
+                else if (token.EndsWith("aras"))
+                {
+                    stem = token.Substring(0, token.Length - 4) + "ar";
+                }
+                else if (token.EndsWith("eras"))
+                {
+                    stem = token.Substring(0, token.Length - 4) + "r";
+                }
                 resultado.Add(stem);
+                
             }
             return resultado;
         }
