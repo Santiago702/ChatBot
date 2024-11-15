@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 using System.Text.RegularExpressions;
+using com.sun.tools.javac.parser;
 
 namespace ChatBot
 {
@@ -11,40 +12,64 @@ namespace ChatBot
         public ChatPrincipal()
         {
             InitializeComponent();
-            chatbot.AppendText("chatbot: Hola, soy tu asistente de registro de Nucleos Temáticos 😊." + Environment.NewLine);
-
-            chatbot.AppendText("chatbot: Dime, ¿Cómo puedo ayudarte hoy?" + Environment.NewLine);
+            Chat('c', "Hola, soy tu asistente de registro de Nucleos Temáticos 😊.");
+            Chat('c', "Dime, ¿Cómo puedo ayudarte hoy?");
         }
 
         private void enviar_Click(object sender, EventArgs e)
         {
-            /*
-            // Obtén la entrada del usuario
             string entrada = usuario.Text;
-
-            // Procesa la entrada (tokenización, etc.)
             List<string> Tokens = Tokenizar(entrada);
+            List<string> Lemas = Lematizar(Tokens);
+            bool RegistrosTokens = (Tokens.Contains("registrar") || 
+                Tokens.Contains("matricular") || 
+                Tokens.Contains("inscribir") || 
+                Tokens.Contains("añadir"));
+            bool RegistrosLemas = (Lemas.Contains("registrar") || 
+                Lemas.Contains("matricular") || 
+                Lemas.Contains("inscribir") || 
+                Lemas.Contains("añadir"));
 
-            // Agrega los resultados al final del TextBox de manera similar a un chat
-            chatbot.AppendText("Usuario: " + entrada + Environment.NewLine);
-            chatbot.AppendText("Chatbot: Palabras encontradas: ");
+            bool EliminacionTokens = (Tokens.Contains("retirar") || Tokens.Contains("eliminar") || Tokens.Contains("borrar") || Tokens.Contains("desmatricular") || Tokens.Contains("quitar"));
+            bool EliminacionLemas = (Lemas.Contains("retirar") || Lemas.Contains("eliminar") || Lemas.Contains("borrar") || Lemas.Contains("desmatricular") || Lemas.Contains("quitar"));
 
-            for (int i = 0; i < Tokens.Count(); i++)
+            bool Errores = (RegistrosTokens && EliminacionTokens) || (RegistrosTokens && EliminacionTokens) || (RegistrosLemas && EliminacionTokens) || (RegistrosLemas && EliminacionTokens);
+
+
+            Chat('u', entrada);
+
+            if (Errores)
             {
-                chatbot.AppendText(Tokens[i]);
-                if (i < Tokens.Count - 1)
-                {
-                    chatbot.AppendText(", ");
-                }
+                Chat('c', "Vale, vamos en orden, ¿Quieres primero inscribir o retirar?");
             }
+            else if (RegistrosTokens || RegistrosLemas)
+            {
+                Chat('c', "Bien, ¡Vamos a registrar!");
+            }
+            else if (EliminacionTokens || EliminacionLemas) 
+            {
+                Chat('c', "Bien, ¡Vamos a retirar!");
+            }
+            else
+            {
+                Chat('c', "No entendí lo que dijiste, pero si tenes dudas te puedo ayudar con registrar o retirar materias");
 
-            chatbot.AppendText(Environment.NewLine); // Añade un salto de línea extra para separar mensajes
-
-            // Limpia el TextBox de entrada
+            }
+            
             usuario.Clear();
-            */
         }
 
+        public void Chat(char sujeto,string text)
+        {
+            if(sujeto == 'u')
+            {
+                chatbot.AppendText("Tu: " + text + Environment.NewLine);
+            }
+            else if(sujeto == 'c')
+            {
+                chatbot.AppendText("chatbot: " + text + Environment.NewLine);
+            }
+        }
         // Función de tokenización
         public static List<string> Tokenizar(string texto)
         {
@@ -56,16 +81,25 @@ namespace ChatBot
         }
 
         // Función de lematización (simplificada)
-        public static List<string> Lemmatizar(List<string> tokens)
+        public static List<string> Lematizar(List<string> tokens)
         {
             // Diccionario simulado de lemas
             Dictionary<string, string> lemas = new Dictionary<string, string>
         {
-            { "corriendo", "correr" },
-            { "comiendo", "comer" },
-            { "estudiando", "estudiar" },
-            { "niños", "niño" },
-            { "ratones", "ratón" },
+            
+            { "registro", "registrar" },
+            { "matriculacion", "matricular" },
+            { "inscripcion", "inscribir" },
+            { "meter", "inscribir" },
+            {"añadir","matricular" },// Eliminacion:
+            { "retiro", "retirar" },
+            { "eliminacion", "eliminar" },
+            { "borre", "borrar" },
+            { "sacar", "desmatricular" },
+            {"quite","quitar" },
+            { "elimine", "eliminar" }
+            
+            
             // Agrega más lemas según sea necesario
         };
 

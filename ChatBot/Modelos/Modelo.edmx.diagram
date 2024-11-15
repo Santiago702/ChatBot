@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="32f8d64076ee403f96e4ba28e0204d4f" Name="Diagram1">
+        <EntityTypeShape EntityType="ChatBotModel.estudiante" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatBotModel.inscripcion" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatBotModel.materia" Width="1.5" PointX="2" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatBotModel.sysdiagrams" Width="1.5" PointX="5.375" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="ChatBotModel.FK_inscripcion_estudiante" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatBotModel.FK_inscripcion_materia" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

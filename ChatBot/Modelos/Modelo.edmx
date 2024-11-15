@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ChatBotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="estudiante">
+          <Key>
+            <PropertyRef Name="estudiante_id" />
+          </Key>
+          <Property Name="estudiante_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="correo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="contraseña" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="creditos" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inscripcion">
+          <Key>
+            <PropertyRef Name="inscripcion_id" />
+          </Key>
+          <Property Name="inscripcion_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estudiante_id" Type="int" Nullable="false" />
+          <Property Name="materia_id" Type="int" Nullable="false" />
+          <Property Name="estado" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="materia">
+          <Key>
+            <PropertyRef Name="materia_id" />
+          </Key>
+          <Property Name="materia_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ubicacion" Type="int" Nullable="false" />
+          <Property Name="creditos" Type="int" Nullable="false" />
+          <Property Name="prerrequisito" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_inscripcion_estudiante">
+          <End Role="estudiante" Type="Self.estudiante" Multiplicity="1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="estudiante_id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="estudiante_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inscripcion_materia">
+          <End Role="materia" Type="Self.materia" Multiplicity="1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="materia_id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="materia_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChatBotModelStoreContainer">
+          <EntitySet Name="estudiante" EntityType="Self.estudiante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inscripcion" EntityType="Self.inscripcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materia" EntityType="Self.materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_inscripcion_estudiante" Association="Self.FK_inscripcion_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inscripcion_materia" Association="Self.FK_inscripcion_materia">
+            <End Role="materia" EntitySet="materia" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChatBotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="estudiante">
+          <Key>
+            <PropertyRef Name="estudiante_id" />
+          </Key>
+          <Property Name="estudiante_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="creditos" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="inscripcion" Relationship="Self.FK_inscripcion_estudiante" FromRole="estudiante" ToRole="inscripcion" />
+        </EntityType>
+        <EntityType Name="inscripcion">
+          <Key>
+            <PropertyRef Name="inscripcion_id" />
+          </Key>
+          <Property Name="inscripcion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estudiante_id" Type="Int32" Nullable="false" />
+          <Property Name="materia_id" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="estudiante" Relationship="Self.FK_inscripcion_estudiante" FromRole="inscripcion" ToRole="estudiante" />
+          <NavigationProperty Name="materia" Relationship="Self.FK_inscripcion_materia" FromRole="inscripcion" ToRole="materia" />
+        </EntityType>
+        <EntityType Name="materia">
+          <Key>
+            <PropertyRef Name="materia_id" />
+          </Key>
+          <Property Name="materia_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ubicacion" Type="Int32" Nullable="false" />
+          <Property Name="creditos" Type="Int32" Nullable="false" />
+          <Property Name="prerrequisito" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="inscripcion" Relationship="Self.FK_inscripcion_materia" FromRole="materia" ToRole="inscripcion" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_inscripcion_estudiante">
+          <End Role="estudiante" Type="Self.estudiante" Multiplicity="1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="estudiante_id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="estudiante_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inscripcion_materia">
+          <End Role="materia" Type="Self.materia" Multiplicity="1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materia">
+              <PropertyRef Name="materia_id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="materia_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChatBotEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="estudiante" EntityType="Self.estudiante" />
+          <EntitySet Name="inscripcion" EntityType="Self.inscripcion" />
+          <EntitySet Name="materia" EntityType="Self.materia" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_inscripcion_estudiante" Association="Self.FK_inscripcion_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inscripcion_materia" Association="Self.FK_inscripcion_materia">
+            <End Role="materia" EntitySet="materia" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChatBotModelStoreContainer" CdmEntityContainer="ChatBotEntities">
+          <EntitySetMapping Name="estudiante">
+            <EntityTypeMapping TypeName="ChatBotModel.estudiante">
+              <MappingFragment StoreEntitySet="estudiante">
+                <ScalarProperty Name="estudiante_id" ColumnName="estudiante_id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="creditos" ColumnName="creditos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inscripcion">
+            <EntityTypeMapping TypeName="ChatBotModel.inscripcion">
+              <MappingFragment StoreEntitySet="inscripcion">
+                <ScalarProperty Name="inscripcion_id" ColumnName="inscripcion_id" />
+                <ScalarProperty Name="estudiante_id" ColumnName="estudiante_id" />
+                <ScalarProperty Name="materia_id" ColumnName="materia_id" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materia">
+            <EntityTypeMapping TypeName="ChatBotModel.materia">
+              <MappingFragment StoreEntitySet="materia">
+                <ScalarProperty Name="materia_id" ColumnName="materia_id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="creditos" ColumnName="creditos" />
+                <ScalarProperty Name="prerrequisito" ColumnName="prerrequisito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ChatBotModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatPrincipal));
             this.usuario = new System.Windows.Forms.TextBox();
             this.chatbot = new System.Windows.Forms.TextBox();
             this.enviar = new System.Windows.Forms.Button();
@@ -69,8 +70,9 @@
             this.Controls.Add(this.chatbot);
             this.Controls.Add(this.usuario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ChatPrincipal";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Asistente de Registro de Horario";
             this.ResumeLayout(false);
             this.PerformLayout();
