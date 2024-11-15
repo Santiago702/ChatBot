@@ -96,7 +96,7 @@ namespace ChatBot
                         Chat('u', entrada);
                         var estudiante = cb.estudiante.Where(c => c.correo.Equals(correoEntrada)).First();
                         est = estudiante;
-                        
+
                         Chat('c', "Hola " + est.nombre.ToUpper() + ", Por favor ingresa tu contraseña");
                         usuario.PasswordChar = '*';
                         posicionAnterior = posicionActual;
@@ -110,26 +110,27 @@ namespace ChatBot
 
                 }
             }
-            else if(posicionActual == "contraseña")
+            else if (posicionActual == "contraseña")
             {
                 Chat('u', "*****");
-                
-                if(entrada.Equals(est.contraseña.ToString()))
+
+                if (entrada.Equals(est.contraseña.ToString()))
                 {
                     creditosRestantes.Visible = true;
                     textoCreditos.Visible = true;
 
-                    creditosRestantes.Text = est.creditos.ToString();  
+                    creditosRestantes.Text = est.creditos.ToString();
 
                     Chat('c', "Todo listo");
-                    
+                    mat.Clear();
+                    aInscribir.Clear();
                     usuario.PasswordChar = '\0';
                     if (accion == "registro")
                     {
-                        if(est.creditos == 0)
+                        if (est.creditos == 0)
                         {
                             Chat('c', "Al parecer ya tienes registrado todos tus creditos");
-                            Chat('c', "¿Deseas salir o quieres eliminar alguna materia?");
+                            Chat('c', "¿Deseas eliminar alguna materia?");
                             posicionAnterior = posicionActual;
                             posicionActual = "inicio";
                         }
@@ -156,7 +157,7 @@ namespace ChatBot
                 else
                 {
                     Chat('c', "Contraseña incorrecta, vuelve a ingresarla porfavor:");
-                    
+
                 }
             }
             else if (posicionActual == "inscripcion")
@@ -173,13 +174,13 @@ namespace ChatBot
                         aInscribir.Add(materia);
                     }
                 }
-                if(aInscribir.Count > 0)
+                if (aInscribir.Count > 0)
                 {
                     Chat('c', "Entiendo que quieres inscribir la(s) siguiente(s) materia(s), ¿es correcto?: ");
 
-                    foreach(var materia in aInscribir)
+                    foreach (var materia in aInscribir)
                     {
-                        Chat('c', " - " + materia.nombre.ToString() +" : " + materia.creditos + " creditos.");
+                        Chat('c', " - " + materia.nombre.ToString() + " : " + materia.creditos + " creditos.");
                     }
                     posicionAnterior = posicionActual;
                     posicionActual = "confirmarInscripcion";
@@ -188,6 +189,48 @@ namespace ChatBot
                 {
                     Chat('c', "No entendí cuál materia te interesa registrar, escribelo nuevamente: ");
 
+                }
+            }
+            else if (posicionActual == "confirmarInscripcion")
+            {
+                Chat('u', entrada);
+                bool afirma =  Lemas.Contains("si");
+                bool niega =   Lemas.Contains("no");
+
+                if (afirma && niega)
+                {
+                    Chat('c', "No entendí si es correcto o no, intenta ser mas específico:");
+                }
+                else if (afirma)
+                {
+                    est = dt.registrarMaterias(aInscribir, est.estudiante_id);
+                    creditosRestantes.Text = est.creditos.ToString();
+                    List<materia> inscritas = dt.verInscripciones(est.estudiante_id);
+                    Chat('c', "Registradas correctamente, actualmente tus inscripciones están así:");
+                    foreach (var materia in inscritas)
+                    {
+                        Chat('c', " - " + materia.nombre.ToString() + " : " + materia.creditos + " creditos.");
+                    }
+                    Chat('c', "Te quedaron " + est.creditos + " creditos restantes");
+                    Chat('c', "Gracias por usar mi chat, ¿quieres inscribir o eliminar alguna materia?");
+                    posicionAnterior = posicionActual;
+                    posicionActual = "inicio";
+                    creditosRestantes.Visible = false;
+                    textoCreditos.Visible = false;
+                }
+                else if(niega)
+                {
+                    Chat('c', "Las materias que puedes registrar son: ");
+                    List<materia> Materias = dt.obtenerMaterias(est.estudiante_id);
+                    mat = Materias;
+                    foreach (var materia in Materias)
+                    {
+                        Chat('c', " - " + materia.nombre.ToString());
+                    }
+                    Chat('c', "¿Cuál deseas inscribir?");
+                    posicionAnterior = posicionActual;
+                    posicionActual = "inscripcion";
+                    aInscribir.Clear();
                 }
             }
             

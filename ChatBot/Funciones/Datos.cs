@@ -36,6 +36,49 @@ namespace ChatBot.Funciones
             }
         }
 
+        public estudiante registrarMaterias( List<materia> materias , int id_estudiante)
+        {
+            using(ChatBotEntities cb = new ChatBotEntities())
+            {
+                int credAMatricular = 0;
+                
+                var estudiante = cb.estudiante.SingleOrDefault(e => e.estudiante_id == id_estudiante);
+                int totalCreditos = materias.Sum(m => m.creditos);
+
+                if(estudiante.creditos >= credAMatricular)
+                {
+                    foreach(var materia in materias)
+                    {
+                        inscripcion i = new inscripcion();
+                        i.materia_id = materia.materia_id;
+                        i.estudiante_id = id_estudiante;
+                        i.estado = "inscrito";
+                        cb.inscripcion.Add(i);
+                    }
+                    estudiante.creditos = estudiante.creditos - totalCreditos;
+                    cb.SaveChanges();
+                }
+                return estudiante;
+            }
+        }
+
+        public List<materia> verInscripciones(int id)
+        {
+            using (ChatBotEntities cb = new ChatBotEntities())
+            {
+                // Consultar las materias inscritas por el estudiante
+                var materiasInscritas = from inscripcion in cb.inscripcion
+                                        join materia in cb.materia on inscripcion.materia_id equals materia.materia_id
+                                        where inscripcion.estudiante_id == id && inscripcion.estado == "inscrito"
+                                        select materia;
+
+                return materiasInscritas.ToList();
+            }
+            
+        }
+
+        
+
 
 
     }

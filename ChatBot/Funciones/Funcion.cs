@@ -34,8 +34,21 @@ namespace ChatBot.Funciones
             { "borre", "borrar" },
             { "sacar", "desmatricular" },
             {"quite","quitar" },
-            { "elimine", "eliminar" }
-
+            { "elimine", "eliminar" },
+            //Confirmación:
+            { "afirmativo", "si" },
+            { "correcto", "si" },
+            { "cierto", "si" },
+            { "si", "si" },
+            {"exacto","si" },
+            { "bien", "si" },
+            //Negación:
+            { "Negativo", "no" },
+            { "incorrecto", "no" },
+            { "erroneo", "no" },
+            { "no", "no" },
+            {"mal","no" },
+            { "nada", "no" },
         };
 
             List<string> resultado = new List<string>();
@@ -60,9 +73,13 @@ namespace ChatBot.Funciones
             {
                 // Simulación simple de stemming
                 string stem = token;
-                if (token.EndsWith("ando") || token.EndsWith("iendo"))
+                if (token.EndsWith("ando"))
                 {
-                    stem = token.Substring(0, token.Length - 4); // Elimina terminaciones de gerundios
+                    stem = token.Substring(0, token.Length - 4) + "ar"; 
+                }
+                else if (token.EndsWith("iendo"))
+                {
+                    stem = token.Substring(0, token.Length - 4) + "er"; 
                 }
                 else if (token.EndsWith("ción") || token.EndsWith("sión"))
                 {
