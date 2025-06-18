@@ -10,8 +10,8 @@ namespace ChatBot.Funciones
     internal class Funcion
     {
         public List<string> Tokenizado(string texto)
-        {
-            // Divide el texto por espacios y elimina signos de puntuación
+        { 
+            
             string[] tokens = Regex.Split(texto.ToLower(), "[^a-záéíóúñ.@]+", RegexOptions.CultureInvariant);
             List<string> resultado = new List<string>(tokens);
             resultado.RemoveAll(token => string.IsNullOrEmpty(token)); // Remueve elementos vacíos
@@ -60,11 +60,11 @@ namespace ChatBot.Funciones
             {
                 if (lemas.ContainsKey(token))
                 {
-                    resultado.Add(lemas[token]); // Reemplaza por el lema
+                    resultado.Add(lemas[token]); 
                 }
                 else
                 {
-                    resultado.Add(token); // Deja el token original si no hay lema
+                    resultado.Add(token); 
                 }
             }
             return resultado;
@@ -75,7 +75,7 @@ namespace ChatBot.Funciones
             List<string> resultado = new List<string>();
             foreach (string token in tokens)
             {
-                // Simulación simple de stemming
+                
                 string stem = token;
                 if (token.EndsWith("ando"))
                 {
